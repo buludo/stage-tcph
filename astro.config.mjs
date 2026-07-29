@@ -8,7 +8,8 @@ import icon from "astro-icon"; // https://www.astroicon.dev/guides/upgrade/v1/
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://blogsmithfree.cosmicthemes.com",
+    site: "https://buludo.github.io",
+    base: "/stage-tcph",
 	markdown: {
 		shikiConfig: {
 			theme: "dracula",
