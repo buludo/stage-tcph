@@ -1,0 +1,50 @@
+---
+import Button from "@components/Button/Button.astro";
+
+import "@splidejs/splide/css";
+import { Splide, SplideSlide } from "astro-splide";
+---
+
+<section>
+	<Splide
+		class="not-content"
+		options={{
+			// check for options at https://splidejs.com/guides/options/
+			type: "fade", // type of the carousel
+			rewind: true, // loop
+			rewindByDrag: true,
+			// width: "120%",
+			autoWidth: true, // problem solved??
+			autoplay: true, // activate autoplay
+			interval: 2000, // autoplay interval in milliseconds
+			padding: { left: 0, right: 0 },
+			arrows: false,
+			pauseOnHover: false, // do not pause autoplay on mouseover
+		}}
+	>
+		<SplideSlide>
+			{" "}
+			<img src="/images/qinlianqixiang/20250905_2077-1024x683.jpg" alt="" />{" "}
+		</SplideSlide>
+		<SplideSlide>
+			{" "}
+			<img src="/images/qinlianqixiang/20250905_1307-1024x683.jpg" alt="" />{" "}
+		</SplideSlide>
+		<SplideSlide>
+			{" "}
+			<img src="/images/qinlianqixiang/20250905_2045-1024x683.jpg" alt="" />{" "}
+		</SplideSlide>
+		<SplideSlide>
+			{" "}
+			<img src="/images/qinlianqixiang/20250905_2072-1024x683.jpg" alt="" />{" "}
+		</SplideSlide>
+		<SplideSlide>
+			{" "}
+			<img src="/images/qinlianqixiang/20250905_2035-1024x683.jpg" alt="" />{" "}
+		</SplideSlide>
+		<SplideSlide>
+			{" "}
+			<img src="/images/qinlianqixiang/2-1-1024x683.jpg" alt="" />{" "}
+		</SplideSlide>
+	</Splide>
+</section>

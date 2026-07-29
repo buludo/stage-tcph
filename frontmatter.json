@@ -1,0 +1,94 @@
+{
+  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
+  "frontMatter.framework.id": "astro",
+  "frontMatter.preview.host": "http://localhost:4321",
+  "frontMatter.content.publicFolder": "public",
+  "frontMatter.content.pageFolders": [
+    {
+      "title": "blog",
+      "path": "[[workspace]]/src/content/blog"
+    },
+    {
+      "title": "myblog",
+      "path": "[[workspace]]/src/data/blog/"
+    },
+    {
+      "title": "mydata",
+      "path": "[[workspace]]/src/data/otherPages/"
+    }
+  ],
+  "frontMatter.taxonomy.contentTypes": [
+    {
+      "name": "default",
+      "pageBundle": false,
+      "previewPath": "'blog'",
+      "filePrefix": null,
+      "clearEmpty": true,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string",
+          "single": true
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Publishing date",
+          "name": "pubDate",
+          "type": "datetime",
+          "default": "{{now}}",
+          "isPublishDate": true
+        },
+        {
+          "title": "Content preview",
+          "name": "heroImage",
+          "type": "image",
+          "isPreviewImage": true
+        }
+      ]
+    },
+    {
+      "name": "eg4me",
+      "pageBundle": true,
+      "fields": [
+        {
+          "title": "title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "pubDate",
+          "name": "pubDate",
+          "type": "datetime"
+        },
+        {
+          "title": "heroImage",
+          "name": "heroImage",
+          "type": "image"
+        },
+        {
+          "title": "authors",
+          "name": "authors",
+          "type": "choice",
+          "choices": [
+            "web-reaper"
+          ]
+        },
+        {
+          "title": "categories",
+          "name": "categories",
+          "type": "categories"
+        }
+      ]
+    }
+  ]
+}

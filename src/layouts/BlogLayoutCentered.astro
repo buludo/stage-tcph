@@ -1,0 +1,88 @@
+---
+import Button from "@components/Button/Button.astro";
+import Category from "@components/Category/Category.astro";
+import { getAllAuthorsData } from "@js/blogUtils";
+import { formatDate } from "@js/textUtils";
+import { Image } from "astro:assets";
+import { type CollectionEntry } from "astro:content";
+import { Icon } from "astro-icon/components";
+
+import BaseLayout from "./BaseLayout.astro";
+import BackToTop from "@components/BackToTop/BackToTop.astro";
+
+interface Props {
+	post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props as Props;
+const { title, description, authors, pubDate, updatedDate, heroImage, categories } = post.data;
+
+const authorsData = await getAllAuthorsData(authors);
+---
+
+<BaseLayout
+	type="blog"
+	title={title}
+	description={description}
+	heroImage={heroImage}
+	authorsData={authorsData}
+	postFrontmatter={post.data}
+>
+	<article class="site-container pt-24 md:pt-36">
+		<!-- Blog post info -->
+		<div class="mx-auto flex max-w-[800px] flex-col items-center">
+			<div class="flex w-full">
+				<div class="mx-auto text-center">
+					<!-- categories -->
+					<div class="flex w-full justify-center gap-3 md:text-lg">
+						{categories.map((category) => <Category category={category} />)}
+					</div>
+
+					<!-- title -->
+					<h1 class="h1 mt-4">{title}</h1>
+				</div>
+			</div>
+
+			<!-- blog post main image -->
+			<div class="mt-6 overflow-hidden">
+				<Image
+					src={heroImage}
+					alt={`cover for ${title}`}
+					width={1600}
+					quality="high"
+					class="rounded-lg object-cover"
+					loading="eager"
+					format="webp"
+					transition:name={`blog-image-${post.id}`}
+				/>
+			</div>
+		</div>
+
+		<!-- article content -->
+		<div class="mt-10 w-full">
+			<div class="mx-auto max-w-2xl">
+				<div class="text-base-content text-base">
+					{
+						updatedDate && (
+							<div class="mb-6 italic">
+								<time datetime={updatedDate.toISOString()}>Updated: {formatDate(updatedDate)}</time>
+							</div>
+						)
+					}
+					<section id="blog-post-content" class="markdown-content mx-auto md:text-lg">
+						<slot />
+					</section>
+
+					<!-- end of post, extra stuff (like share buttons) here -->
+					<hr class="border-accent my-4 w-full border-t-2" />
+
+					<!-- button to go back to homepage -->
+					<div class="flex justify-center">
+						<Button variant="outline" href="/" arrow="left" class=""> Back to Home </Button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</article>
+	<BackToTop />
+</BaseLayout>

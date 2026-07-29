@@ -1,0 +1,42 @@
+---
+import Button from "@components/Button/Button.astro";
+// components
+import Hero2 from "@components/Hero/Hero2.astro";
+import Hero22 from "@components/Hero/Hero22.astro";
+import PostCard from "@components/PostCard/PostCard.astro";
+// data
+import siteData from "@config/siteData.json";
+// utils
+import { formatPosts, getAllPosts } from "@js/blogUtils";
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+
+const posts = await getAllPosts();
+const recentPosts = formatPosts(posts, { limit: 1 });
+---
+
+<BaseLayout title={siteData.title} description={siteData.description}>
+	<div class="site-container mt-10">
+		<!-- start  -->
+		<div class="min-h-screen w-full bg-white dark:bg-black">
+			<div class="flex flex-col items-center justify-center gap-4 px-4 pt-6 pb-10 md:px-6">
+				<!--  -->
+				<img
+					class="h-[60vh] w-full rounded"
+					src="/images/qinlianqixiang/20250905_1307.jpg"
+					alt="Top Image"
+				/>
+				<!--  -->
+				<div class="flex w-full items-center justify-between gap-2">
+					<Hero2 />
+				</div>
+			</div>
+		</div>
+		<!-- end -->
+
+		<!-- Recent blogs -->
+
+		<Hero22 />
+	</div>
+</BaseLayout>

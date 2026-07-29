@@ -1,0 +1,43 @@
+<button id="back-to-top" class="back-to-top" aria-label="回到頁首">↑</button>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    background-color: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    cursor: pointer;
+    display: none; /* 初始隱藏 */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+  }
+  .back-to-top.show {
+    display: flex;
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('back-to-top');
+  const showAfter = 300; // 滾動超過 300px 才顯示
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > showAfter) {
+      btn.classList.add('show');
+    } else {
+      btn.classList.remove('show');
+    }
+  });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>

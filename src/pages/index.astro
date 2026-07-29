@@ -1,0 +1,85 @@
+---
+import Button from "@components/Button/Button.astro";
+// components
+import Hero from "@components/Hero/Hero.astro";
+import PostCard from "@components/PostCard/PostCard.astro";
+// data
+import siteData from "@config/siteData.json";
+// utils
+import { formatPosts, getAllPosts } from "@js/blogUtils";
+// layout
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+
+const posts = await getAllPosts();
+const recentPosts = formatPosts(posts, { limit: 1 });
+
+import { YouTube } from "astro-embed";
+---
+
+<BaseLayout title={siteData.title} description={siteData.description}>
+	<Hero />
+
+	<div
+		class="h-screen w-full bg-[url('https://images.unsplash.com/9/fields.jpg?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8bGVudGFscyUyMGZhcm18ZW58MHwwfHx8MTcxMjc0NjE1OXww&ixlib=rb-4.0.3&q=80&w=1080')] bg-cover bg-center bg-no-repeat"
+	>
+		<div
+			class="relative h-screen overflow-hidden bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+		>
+			<div class="absolute inset-0">
+				<img
+					src="/images/qinlianqixiang/20250905_1307.jpg"
+					alt="Background Image"
+					class="h-full w-full object-cover object-center"
+				/>
+				<div class="absolute inset-0 bg-black opacity-50"></div>
+			</div>
+
+			<div class="relative z-10 flex h-full flex-col items-center justify-center text-center">
+				<h1 class="mb-4 text-5xl leading-tight font-bold">
+					<br />古典<br /><br />不是一味守舊不變
+				</h1>
+				<p class="mb-8 text-lg text-gray-300">
+					台北城市愛樂帶您品味單純音符下散發的獨特魅力。<br
+					/>葛令卡《盧斯蘭與魯蜜拉》序曲、柴科夫斯基《詼諧圓舞曲》、蕭《單簧管協奏曲》、普羅科菲夫《騎士之舞》……
+				</p>
+
+				<a
+					href="https://www.opentix.life/o/1384450212187127809?srsltid=AfmBOoo_sLxMdm-knbneuH3RqnpkwEyLqT2w6FNMm8cE4dbnWqo1Myxc"
+					class="transform rounded-full bg-yellow-400 px-6 py-2 text-lg font-semibold text-gray-900 transition duration-300 ease-in-out hover:scale-105 hover:bg-yellow-300 hover:shadow-lg"
+					target="_blank"
+				>
+					立即購票
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="site-container mt-10">
+		<div class="mx-auto max-w-3xl md:mt-12">
+			<YouTube id="https://www.youtube.com/watch?v=v5AOQdUlLac" title="點擊將開始播放" />
+			<YouTube id="https://www.youtube.com/watch?v=8Vt2KgRrynA" title="點擊將開始播放" />
+			<YouTube id="https://www.youtube.com/watch?v=xeATsOSGHhM" title="點擊將開始播放" />
+		</div>
+
+		<!-- Recent blogs -->
+		<div class="mx-auto max-w-3xl md:mt-12">
+			<h2 class="h2 text-center">News</h2>
+			<hr class="bg-primary-600/50 mx-auto mt-4 max-w-[30%] rounded-full border-none pt-1" />
+			<div class="mt-8 grid gap-4 md:grid-cols-2">
+				{
+					recentPosts.map((post, idx) =>
+						// first post is large post card, don't re-show it here
+						idx === 0 ? (
+							<div class="md:col-span-2">
+								<PostCard post={post} showDescription={true} />
+							</div>
+						) : (
+							<PostCard post={post} showDescription={true} />
+						),
+					)
+				}
+			</div>
+		</div>
+	</div>
+</BaseLayout>
