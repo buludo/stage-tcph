@@ -2,6 +2,7 @@
 	"name": "blogsmith-free",
 	"type": "module",
 	"version": "5.1.0",
+    "packageManager": "pnpm@10.6.5",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
