@@ -1,5 +1,6 @@
 ---
 import { type navLinkItem } from "@config/navData.json";
+import { normalizePath, withBase } from "@js/pathUtils";
 
 interface Props {
 	navItem: navLinkItem;
@@ -8,6 +9,8 @@ interface Props {
 
 const { navItem, class: className } = Astro.props as Props;
 const { text, link, newTab = false } = navItem;
+const href = withBase(link);
+const isActive = normalizePath(Astro.url.pathname) === normalizePath(href);
 
 // if the current page is the same as the link, we change the styling
 ---
@@ -18,10 +21,10 @@ const { text, link, newTab = false } = navItem;
 			`primary-focus hover:text-primary-700 relative block w-full px-4 py-2 font-medium transition ${className}`,
 			{
 				// styling for current active page link
-				"text-base-600": Astro.url.pathname === link,
+				"text-base-600": isActive,
 			},
 		]}
-		href={link}
+		href={href}
 		target={newTab ? "_blank" : ""}
 		rel={newTab ? "noopener noreferrer" : ""}
 	>

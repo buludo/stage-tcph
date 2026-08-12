@@ -7,6 +7,7 @@ import PostCard from "@components/PostCard/PostCard.astro";
 import siteData from "@config/siteData.json";
 // utils
 import { formatPosts, getAllPosts } from "@js/blogUtils";
+import { withBase } from "@js/pathUtils";
 // layout
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { Image } from "astro:assets";
@@ -28,7 +29,7 @@ import { YouTube } from "astro-embed";
 		>
 			<div class="absolute inset-0">
 				<img
-					src="/images/qinlianqixiang/20250905_1307.jpg"
+					src={withBase("/images/qinlianqixiang/20250905_1307.jpg")}
 					alt="Background Image"
 					class="h-full w-full object-cover object-center"
 				/>

@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@js/pathUtils";
 import type { HTMLAttributes } from "astro/types";
 import { Icon } from "astro-icon/components";
 
@@ -13,10 +14,11 @@ interface Props extends HTMLAttributes<"button">, Omit<HTMLAttributes<"a">, "typ
 	arrow?: "left" | "right" | "none";
 }
 
-const { variant = "primary", arrow = "none", class: className, ...rest } = Astro.props;
+const { variant = "primary", arrow = "none", class: className, href, ...rest } = Astro.props;
+const resolvedHref = href && href !== "" ? withBase(href) : href;
 
 let Component = "button";
-if (Astro.props.href) {
+if (resolvedHref) {
 	Component = "a";
 }
 ---
@@ -38,7 +40,7 @@ if (Astro.props.href) {
 			"button--ghost": variant === "ghost",
 		},
 	]}
-	{...rest}
+	{...(resolvedHref ? { ...rest, href: resolvedHref } : rest)}
 >
 	{
 		arrow === "left" && (
