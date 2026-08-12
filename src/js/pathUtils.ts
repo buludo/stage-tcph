@@ -13,6 +13,10 @@ export function withBase(path: string): string {
 
 	const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
+	if (path.startsWith(`${base}/`) || path === base || path === `${base}/`) {
+		return path;
+	}
+
 	if (path === "/" || path === "") {
 		return `${base}/`;
 	}

@@ -1,4 +1,5 @@
 ---
+import MdxImage from "@components/MdxImage/MdxImage.astro";
 // layout
 import BaseLayout from "@layouts/BaseLayout.astro";
 import { type InferGetStaticPropsType } from "astro";
@@ -33,7 +34,7 @@ const { title, description } = page.data;
 		</h1>
 		<hr class="bg-primary-600/50 mx-auto mt-4 max-w-[30%] rounded-full border-none pt-1" />
 		<div class="text-base-content markdown-content max-w-none py-6 text-sm md:px-8 md:text-base">
-			<Content />
+			<Content components={{ img: MdxImage }} />
 		</div>
 	</section>
 </BaseLayout>
