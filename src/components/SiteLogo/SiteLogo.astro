@@ -1,10 +1,11 @@
 ---
 import siteData from "@config/siteData.json";
 import logo from "@images/logo-music2020.png";
+import { withBase } from "@js/pathUtils";
 import { Image } from "astro:assets";
 ---
 
-<a class="primary-focus flex items-center align-middle" href="/" aria-label="Home" class="">
+<a class="primary-focus flex items-center align-middle" href={withBase("/")} aria-label="Home" class="">
 	<Image src={logo} alt="TCPH logo" loading="eager" width={373} height={80} class="h-10 w-46" />
 	<div class="text-2xl font-semibold">&nbsp;</div>
 </a>

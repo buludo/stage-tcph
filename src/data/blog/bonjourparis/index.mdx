@@ -8,6 +8,7 @@ categories: [concerts]
 ---
 
 import { YouTube, LinkPreview } from "astro-embed";
+import MdxEmbed from "@components/MdxImage/MdxEmbed.astro";
 
 <YouTube id="https://youtu.be/sHPEzjwtST8?si=Le6flbwzPZAhXOZM" />
 
@@ -17,12 +18,7 @@ import { YouTube, LinkPreview } from "astro-embed";
 **琴繫。巴黎**
 節目手冊
 
-<embed
-	src="/images/bonjourparis/2021bonjourparis.pdf"
-	type="application/pdf"
-	width="100%"
-	height="400"
-></embed>
+<MdxEmbed src="/images/bonjourparis/2021bonjourparis.pdf" type="application/pdf" ratio={0.7071} />
 
 **2021.11.8 晚上7:30**
 **中山堂中正廳 誠摯邀請您一起參加 索票入場**

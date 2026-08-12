@@ -1,0 +1,11 @@
+---
+import { withBase } from "@js/pathUtils";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"img">;
+
+const { src, ...rest } = Astro.props;
+const resolvedSrc = typeof src === "string" ? withBase(src) : src;
+---
+
+<img src={resolvedSrc} {...rest} />

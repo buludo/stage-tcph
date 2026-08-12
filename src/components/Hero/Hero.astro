@@ -1,5 +1,6 @@
 ---
 import Button from "@components/Button/Button.astro";
+import { withBase } from "@js/pathUtils";
 
 import { YouTube } from "astro-embed";
 ---
@@ -10,7 +11,7 @@ import { YouTube } from "astro-embed";
 	<YouTube
 		id="https://youtu.be/sm-zJkqUJcQ?si=lcA85Ke4NXtqkdnS&t=19"
 		title="點擊將開始播放"
-		poster="/images/pages/home2026min.jpg"
+		poster={withBase("/images/pages/home2026min.jpg")}
 		posterQuality="max"
 		class="min-w-full"
 	/>

@@ -1,4 +1,5 @@
 ---
+import { withBase } from "@js/pathUtils";
 import { categorify, slugify } from "@js/textUtils";
 
 interface Props {
@@ -9,6 +10,6 @@ interface Props {
 const { category, class: className } = Astro.props as Props;
 ---
 
-<a href={`/categories/${slugify(category)}/`} class={`main-text-gradient font-medium ${className}`}>
+<a href={withBase(`/categories/${slugify(category)}/`)} class={`main-text-gradient font-medium ${className}`}>
 	{categorify(category)}
 </a>

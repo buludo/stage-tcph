@@ -1,0 +1,55 @@
+---
+import { withBase } from "@js/pathUtils";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"embed"> {
+	/** PDF page aspect ratio (width / height). Defaults to A4 portrait. */
+	ratio?: number;
+	/** PDF open parameter controlling initial zoom. Pass "" to leave it to the viewer. */
+	view?: string;
+}
+
+const { src, ratio = 0.707, view = "FitH", class: className, width, height, ...rest } = Astro.props;
+const basedSrc = typeof src === "string" ? withBase(src) : src;
+// "FitH" scales the page to the viewer's width, so the content fills the box
+// instead of being shrunk to fit the height.
+const resolvedSrc = typeof basedSrc === "string" && view ? `${basedSrc}#view=${view}` : basedSrc;
+
+// Chrome's viewer reserves a fixed-width thumbnail rail and a toolbar, neither of
+// which we can style. They don't scale with the box, so the way to give the page
+// more room is to widen the box: the rail's share shrinks as the box grows.
+const RAIL = 300;
+const TOOLBAR = 44;
+const WIDE = 760;
+
+// Height that fits exactly one full page beside the rail at the widened size.
+const wideRatio = (WIDE / ((WIDE - RAIL) / ratio + TOOLBAR)).toFixed(4);
+// Narrow screens: the rail is hidden, so the box just follows the page shape.
+const narrowRatio = (ratio / 1.06).toFixed(4);
+---
+
+<div class="pdf-breakout" style={`--pdf-narrow: ${narrowRatio}; --pdf-wide: ${wideRatio};`}>
+	<embed src={resolvedSrc} class:list={["pdf-embed", className]} {...rest} />
+</div>
+
+<style>
+	/* Break out of the article's prose column so the page gets more width. */
+	.pdf-breakout {
+		width: min(760px, calc(100vw - 3rem));
+		margin-left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.pdf-embed {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: var(--pdf-narrow);
+	}
+
+	@media (min-width: 768px) {
+		.pdf-embed {
+			aspect-ratio: var(--pdf-wide);
+		}
+	}
+</style>
