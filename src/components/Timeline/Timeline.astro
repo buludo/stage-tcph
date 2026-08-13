@@ -1,0 +1,15 @@
+---
+// Vertical timeline. Single column on small screens, alternating left/right from md up.
+---
+
+<div class="not-content relative my-10">
+	<!-- rail: hugs the left edge on mobile, runs down the centre on wider screens -->
+	<div
+		class="bg-navy-100 absolute top-2 bottom-2 left-[7px] w-px md:left-1/2 md:-translate-x-1/2"
+		aria-hidden="true"
+	>
+	</div>
+	<ol class="m-0 list-none space-y-6 p-0 md:space-y-0">
+		<slot />
+	</ol>
+</div>

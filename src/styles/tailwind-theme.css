@@ -17,6 +17,19 @@
 	--color-primary-900: var(--color-blue-900);
 	--color-primary-950: var(--color-blue-950);
 
+	/* brand navy, sampled from the TCPH logo (700 is the logo's exact ink) */
+	--color-navy-50: #f2f6fa;
+	--color-navy-100: #e0e7ec;
+	--color-navy-200: #bfccd7;
+	--color-navy-300: #8ca3b7;
+	--color-navy-400: #597a98;
+	--color-navy-500: #2e587d;
+	--color-navy-600: #14436d;
+	--color-navy-700: #003360;
+	--color-navy-800: #002b52;
+	--color-navy-900: #002443;
+	--color-navy-950: #001a30;
+
 	/* base colors */
 	--color-base-50: var(--color-gray-50);
 	--color-base-100: var(--color-gray-100);
