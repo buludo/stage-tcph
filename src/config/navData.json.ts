@@ -35,10 +35,6 @@ const navConfig: navItem[] = [
 		text: "CONCERTS & EVENTS",
 		dropdown: [
 			{
-				text: "Home...old",
-				link: "/index3",
-			},
-			{
 				text: "Season 2025",
 				link: "/blog/qinlianqixiang/",
 			},
