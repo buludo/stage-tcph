@@ -11,6 +11,8 @@ export interface SiteDataProps {
 	defaultImage: {
 		src: string;
 		alt: string;
+		width: number;
+		height: number;
 	};
 }
 
@@ -18,12 +20,12 @@ export interface SiteDataProps {
 const siteData: SiteDataProps = {
 	name: "台北城市愛樂",
 	// Your website's title and description (meta fields)
-	title: "台北城市愛樂 Taipei City Philiharmonic",
-	description: "台北城市愛樂 Taipei City Philiharmonic",
+	title: "台北城市愛樂 Taipei City Philharmonic",
+	description: "台北城市愛樂 Taipei City Philharmonic",
 	useViewTransitions: true,
 	// Your information!
 	author: {
-		name: "台北城市愛樂 Taipei City Philiharmonic",
+		name: "台北城市愛樂 Taipei City Philharmonic",
 		email: "tcph2026@hotmail.com",
 		twitter: "TCPH_2026",
 	},
@@ -32,6 +34,8 @@ const siteData: SiteDataProps = {
 	defaultImage: {
 		src: "/images/site-logo.png",
 		alt: "TCPH logo",
+		width: 1200,
+		height: 630,
 	},
 };
 
