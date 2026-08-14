@@ -48,6 +48,20 @@ function trimEndSlash(str: string) {
 // put together the image URL
 const imageUrl =
 	trimEndSlash(Astro.site?.toString() || "") + (optimizedImage?.src || siteData.defaultImage.src);
+
+// Only blog posts go through getImage, which always emits webp. Everything else
+// falls back to the file in /public, so describe that file rather than assuming.
+const mimeTypes: Record<string, string> = {
+	png: "image/png",
+	jpg: "image/jpeg",
+	jpeg: "image/jpeg",
+	webp: "image/webp",
+	gif: "image/gif",
+};
+const defaultImageExt = siteData.defaultImage.src.split(".").pop()?.toLowerCase() ?? "";
+const imageType = optimizedImage ? "image/webp" : (mimeTypes[defaultImageExt] ?? "image/png");
+const imageWidth = optimizedImage?.attributes.width || siteData.defaultImage.width;
+const imageHeight = optimizedImage?.attributes.height || siteData.defaultImage.height;
 ---
 
 <SEO
@@ -66,9 +80,9 @@ const imageUrl =
 			siteName: siteData.title,
 		},
 		image: {
-			type: "image/webp",
-			width: optimizedImage?.attributes.width || "1200",
-			height: optimizedImage?.attributes.height || "800",
+			type: imageType,
+			width: imageWidth,
+			height: imageHeight,
 			alt: title,
 		},
 	}}

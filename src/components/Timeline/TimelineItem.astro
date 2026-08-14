@@ -1,0 +1,82 @@
+---
+import { withBase } from "@js/pathUtils";
+
+interface Props {
+	date: string;
+	title: string;
+	/** Internal path to the event's blog post, if one exists. */
+	href?: string;
+}
+
+const { date, title, href } = Astro.props;
+const link = href ? withBase(href) : undefined;
+const hasDetail = Astro.slots.has("default");
+---
+
+<li class="tl-item relative pl-8 md:w-1/2 md:pl-0">
+	<span class="tl-node border-navy-700 absolute block size-[15px] rounded-full border-2 bg-white"
+	></span>
+
+	<div class="md:py-4">
+		<div
+			class="border-base-200 hover:border-navy-300 rounded-xl border bg-white p-5 transition duration-200 hover:shadow-[0_2px_16px_rgba(0,51,96,0.10)]"
+		>
+			<p class="text-navy-700 m-0 text-xs font-semibold tracking-wider md:text-sm">{date}</p>
+
+			<h3 class="text-base-900 mt-1.5 mb-0 text-lg font-semibold md:text-xl">
+				{
+					link ? (
+						<a href={link} class="hover:text-navy-700 no-underline transition-colors">
+							{title}
+						</a>
+					) : (
+						title
+					)
+				}
+			</h3>
+
+			{
+				hasDetail && (
+					<p class="text-base-600 mt-2 mb-0 text-sm leading-relaxed md:text-[0.95rem]">
+						<slot />
+					</p>
+				)
+			}
+		</div>
+	</div>
+</li>
+
+<style>
+	/* Mobile: single column, rail and nodes hug the left edge. */
+	.tl-node {
+		top: 0.5rem;
+		left: 0;
+	}
+
+	/* From md up the rail runs down the centre and items alternate sides.
+	   The node has to key off the *item's* position, not its own, so this
+	   lives in CSS rather than as an odd:/even: utility on the node itself. */
+	@media (min-width: 768px) {
+		.tl-node {
+			top: 50%;
+			left: auto;
+		}
+
+		.tl-item:nth-child(odd) {
+			padding-right: calc(var(--spacing) * 12);
+		}
+		.tl-item:nth-child(odd) .tl-node {
+			right: 0;
+			translate: 50% -50%;
+		}
+
+		.tl-item:nth-child(even) {
+			margin-left: auto;
+			padding-left: calc(var(--spacing) * 12);
+		}
+		.tl-item:nth-child(even) .tl-node {
+			left: 0;
+			translate: -50% -50%;
+		}
+	}
+</style>
